@@ -2806,6 +2806,15 @@ return {
                     "with random {C:pink}Type{} stickers",
                 },
             },
+            sleeve_poke_telekineticsleeve = {
+                name = "Telekinetic Sleeve",
+                text = {
+                    "Start run with the",
+                    "{C:tarot,T:v_crystal_ball}#1#{} voucher",
+                    "and {C:attention}2{} copies",
+                    "of {C:item,T:c_poke_twisted_spoon}#2#"
+                } 
+            },
         },
         Spectral = {
             c_poke_ultraball = {
@@ -3252,6 +3261,15 @@ return {
                     "{C:inactive,s:0.8}(Non-Pokemon Jokers will always use precise scaling){}"
                 }
             },
+            discovery_tooltip = {
+              name = "Discovery",
+              text = {
+                "Pokermon mod objects are undiscovered",
+                "by default. Turning off this config option",
+                "will discover all mod objects",
+                "{C:red}Discovering all objects can't be undone{}"
+              }
+            }, 
             designed_by = {
               name = "Designed By",
               text = {
@@ -3269,8 +3287,8 @@ return {
               name = "Tag Pool",
               text = {
                 "{C:attention}#1#",
-                "{C:spectral}#2#",
-                "{C:pink}#3#",
+                "{C:tarot}#2#",
+                "{C:attention}#3#",
               }
             },
             safaridesc = {
@@ -3498,6 +3516,7 @@ return {
             poke_settings_pokemon_splash = "Pokémon Splash Card?",
             poke_settings_pokemon_gen_one = "Gen 1 Only?",
             poke_settings_pokemon_precise_energy = "Use Precise Energy Scaling?",
+            poke_settings_pokemon_discovery = "! Discovery?",
             poke_credits_actualcredits = "Credits",
             poke_credits_thanks = "Thanks to",
             poke_credits_lead = "Lead Developer: ",
@@ -3508,6 +3527,7 @@ return {
             poke_credits_community_manager = "Community Managers: ",
             poke_credits_promotion_producer = "Promotion Producer: ",
             poke_credits_localization = "Localization: ",
+            poke_credits_sound = "Audio Engineer: ",
 
             poke_plus_pokeitem = "+1 Item",
             poke_plus_energy = "+1 Energy",
