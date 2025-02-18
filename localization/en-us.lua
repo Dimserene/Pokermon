@@ -820,12 +820,12 @@ return {
             j_poke_golbat = {
                 name = "Golbat",
                 text = {
-                    "Remove scoring card {C:dark_edition}Enhancements",
-                    "Gain {C:mult}+#2#{} for {C:attention}Mult{} and {C:attention}Wild{} cards",
-                    "{C:chips}+#4#{} for {C:attention}Bonus{} and {C:attention}Stone{} cards",
-                    "{X:red,C:white}X#6#{} for {C:attention}Steel{} and {C:attention}Glass{} cards",
-                    "{C:money}$#8#{} for {C:attention}Gold{} and {C:attention}Lucky{} cards",
-                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive}, {C:chips}+#3#{C:inactive}, {X:red,C:white}X#5#{C:inactive}, {C:money}$#7#{C:inactive} end of round)",
+                    "Gain {C:chips}+#4#{} for scoring {C:attention}Bonus{} / {C:attention}Stone{} cards",
+                    "{C:mult}+#2#{} for scoring {C:attention}Mult{} / {C:attention}Wild{} cards",
+                    "{X:red,C:white}X#6#{} for scoring {C:attention}Steel{} / {C:attention}Glass{} cards",
+                    "{C:money}$#8#{} for scoring {C:attention}Gold{} / {C:attention}Lucky{} cards",
+                    "Then remove scoring card {C:dark_edition}Enhancements",
+                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive}, {C:mult}+#1#{C:inactive}, {X:red,C:white}X#5#{C:inactive}, {C:money}$#7#{C:inactive} end of round)",
                     "{C:inactive,s:0.8}(Evolves at #9#/{C:attention,s:0.8}20{C:inactive,s:0.8} Enhancements eaten)",
                 } 
             },
@@ -1221,8 +1221,8 @@ return {
                 text = {
                     "{C:mult}+#1#{} Mult if scoring hand",
                     "contains at least {C:attention}2{} face cards",
-                    "{C:mult}+#1#{} Mult if scoring hand",
                     "{br:2}text needs to be here to work",
+                    "{C:mult}+#1#{} Mult if scoring hand",
                     "contains a {C:attention}Full House{}",
                     "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#2#{C:inactive,s:0.8} rounds)",
                 } 
@@ -1914,12 +1914,12 @@ return {
             j_poke_crobat = {
                 name = 'Crobat',
                 text = {
-                    "{C:attention}Randomize{} existing scoring card Enhancements",
-                    "Gain {C:mult}+#2#{} for {C:attention}Mult{} and {C:attention}Wild{} cards",
-                    "{C:chips}+#4#{} for {C:attention}Bonus{} and {C:attention}Stone{} cards",
-                    "{X:red,C:white}X#6#{} for {C:attention}Steel{} and {C:attention}Glass{} cards",
-                    "{C:money}$#8#{} for {C:attention}Gold{} and {C:attention}Lucky{} cards",
-                    "{C:inactive}(Currently {C:mult}+#1#{}, {C:chips}+#3#{}, {X:red,C:white}X#5#{}, {C:money}$#7#{C:inactive} end of round)"
+                    "Gain {C:chips}+#4#{} for scoring {C:attention}Bonus{} / {C:attention}Stone{} cards",
+                    "{C:mult}+#2#{} for scoring {C:attention}Mult{} / {C:attention}Wild{} cards",
+                    "{X:red,C:white}X#6#{} for scoring {C:attention}Steel{} / {C:attention}Glass{} cards",
+                    "{C:money}$#8#{} for scoring {C:attention}Gold{} / {C:attention}Lucky{} cards",
+                    "Then {C:attention}Randomize{} scoring card {C:dark_edition}Enhancements",
+                    "{C:inactive}(Currently {C:chips}+#3#{}, {C:mult}+#1#{}, {X:red,C:white}X#5#{}, {C:money}$#7#{C:inactive} end of round)"
                 } 
             },
             j_poke_pichu = {
