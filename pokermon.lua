@@ -1,3 +1,10 @@
+if SMODS.current_mod then
+  local loaded, config = pcall(require, "pokermon.setup")
+  if not loaded then
+      error("Pokermon did not load correctly. Please make sure the Pokermon folder isn't nested within the Mods folder and that you have everything installed properly.")
+  end
+end
+
 pokermon = {}
 
 --Undiscovered sprites, mostly for testing some localization things since the game crashes without them
@@ -67,6 +74,13 @@ else
   helper()
 end
 
+local helper, load_error = SMODS.load_file("functions/pokeanimations.lua")
+if load_error then
+  sendDebugMessage ("The error is: "..load_error)
+else
+  helper()
+end
+
 --Load Sprites file
 local sprite, load_error = SMODS.load_file("pokesprites.lua")
 if load_error then
@@ -74,6 +88,9 @@ if load_error then
 else
   sprite()
 end
+
+--Commenting this out for now since it doesn't work 100% of the time
+--check_for_needed_config()
 
 --Load UI file
 local UI, load_error = SMODS.load_file("pokeui.lua")
