@@ -761,9 +761,9 @@ return {
             j_poke_clefable = {
                 name = "Clefable",
                 text = {
-                    "When scored, played {C:clubs}#2#{} cards",
-                    "give {C:mult}+#1#{} Mult for each {C:clubs}#2#{} card",
-                    "scored this round",
+                    "When scored, {C:clubs}#2#{} cards",
+                    "give {C:mult}+#1#{} Mult for each",
+                    "{C:clubs}#2#{} card played this round",
                     "{C:inactive,s:0.8}(If you play 5 clubs, each gives {C:mult,s:0.8}+5{C:inactive,s:0.8} Mult)",
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
                 } 
@@ -1728,7 +1728,7 @@ return {
                 text = {
                     "{C:attention}Ancient #1#s{}",
                     "{X:attention,C:white}1+{} : Create a {C:tarot}Tarot{} card",
-                    "{X:attention,C:white}2+{} : Each played {C:attention}#1#{} earns {C:money}$#2#{} when scored",
+                    "{X:attention,C:white}2+{} : Earn {C:money}$#2#{}",
                     "{X:attention,C:white}3+{} : Create a {C:item}Item{} card",
                     "{C:inactive,s:0.8}(Must have room)",
                     "{C:inactive,s:0.8}(Evolves after triggering third level {C:attention,s:0.8}#3#{C:inactive,s:0.8} times)"
@@ -1739,7 +1739,7 @@ return {
                 text = {
                     "{C:attention}Ancient #1#s{}",
                     "{X:attention,C:white}1+{} : Create a {C:tarot}Tarot{} card",
-                    "{X:attention,C:white}2+{} : Each played {C:attention}#1#{} earns {C:money}$#2#{} when scored",
+                    "{X:attention,C:white}2+{} : Earn {C:money}$#2#{}",
                     "{X:attention,C:white}3+{} : Create a {C:item}Item{} card",
                     "{C:inactive,s:0.8}(Must have room)",
                     "{X:attention,C:white}4+{} : Create a {C:attention}tag{} once per round{C:inactive}#3#{}",
@@ -2362,18 +2362,20 @@ return {
             j_poke_beldum = {
                 name = 'Beldum',
                 text = {
-                    "If played hand contains at least",
-                    "one scoring {C:attention}Ace{}, gain {C:chips}+#2#{} Chips",
-                    "{C:attention}Double{} gains if hand is a {C:attention}Four of a Kind{}",
+                    "Gains {C:chips}+#2#{} Chips if played hand",
+                    "is a {C:attention}Four of a Kind{}",
+                    "Gains {C:chips}+#2#{} Chips if played hand",
+                    "contains a scoring {C:attention}Ace",
                     "{C:inactive}(Evolves at {C:chips}+#1#{C:inactive} / +64 Chips)",
                 } 
             },
             j_poke_metang = {
                 name = 'Metang',
                 text = {
-                    "If played hand contains at least",
-                    "two scoring {C:attention}Aces{}, gain {C:chips}+#2#{} Chips",
-                    "{C:attention}Quadruple{} gains if hand is a {C:attention}Four of a Kind{}",
+                    "Gains {C:chips}+#2#{} Chips if played hand",
+                    "is a {C:attention}Four of a Kind{}",
+                    "Gains {C:chips}+#2#{} Chips if played hand",
+                    "contains {C:attention}2+{} scoring {C:attention}Aces",
                     "{C:inactive}(Evolves at {C:chips}+#1#{C:inactive} / +256 Chips)",
                 } 
             },
