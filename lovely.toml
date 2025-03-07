@@ -81,18 +81,6 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = "self.removed = true"
-position = "after"
-payload = '''
-if self.set == 'Joker' and self.edition and self.edition.poke_shiny then
-  SMODS.change_booster_limit(-1)
-end
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
 pattern = "self.added_to_deck = false"
 position = "after"
 payload = '''
@@ -318,7 +306,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = 'functions/misc_functions.lua'
-pattern = "elseif part.control.X then"
+pattern = "elseif part.control.X or part.control.B then"
 position = "before"
 payload = '''
 elseif part.control.br then
@@ -341,14 +329,31 @@ elseif part.control.br then
 '''
 match_indent = true
 
-
-# Pokemon Form functionality
+# For previous versions
 [[patches]]
 [patches.pattern]
-target = "card.lua"
-pattern = "self:set_sprites(self.config.center, self.config.card)"
-position = "after"
-payload = "if type(update_pokemon_form_sprites) == 'function' then update_pokemon_form_sprites(self) end"
+target = 'functions/misc_functions.lua'
+pattern = "elseif part.control.X then"
+position = "before"
+payload = '''
+elseif part.control.br then
+  local height = 0.05
+  local gaps = 0.2
+  local mid = 0.15
+  local sides = (tonumber(part.control.br) - gaps*2 - mid) / 2
+  -- spacing
+  args.nodes[#args.nodes+1] = {{n=G.UIT.R, config={align = "cm", minh = height}, nodes={}}}
+  if sides < gaps then
+    args.nodes[#args.nodes+1] = {{n=G.UIT.C, config={align = "cm", colour = G.C.UI.TRANSPARENT_DARK, minw = tonumber(part.control.br), minh = height}}}
+  else
+    local temp_nodes = {{n=G.UIT.C, config={align = "cm", colour = G.C.UI.TRANSPARENT_DARK, minw = sides, minh = height}, nodes={}},
+                        {n=G.UIT.C, config={align = "cm", minw = gaps}, nodes={}},
+                        {n=G.UIT.C, config={align = "cm", colour = G.C.UI.TEXT_INACTIVE, minw = mid, minh = height}, nodes={}},
+                        {n=G.UIT.C, config={align = "cm", minw = gaps}, nodes={}},
+                        {n=G.UIT.C, config={align = "cm", colour = G.C.UI.TRANSPARENT_DARK, minw = sides, minh = height}, nodes={}}}
+    args.nodes[#args.nodes+1] = {{n=G.UIT.R, config={align = "cm", minw = tonumber(part.control.br)}, nodes=temp_nodes}}
+  end
+'''
 match_indent = true
 
 
@@ -376,3 +381,91 @@ for i = 1, #jirachis do
 end
 '''
 match_indent = true
+
+#Probopass face
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if (id > 0 and rank and rank.face) or next(find_joker("Pareidolia")) then
+    return true
+end
+'''
+position = "after"
+payload = '''
+if next(SMODS.find_card('j_poke_probopass')) and self.ability.name == 'Stone Card' then return true end
+'''
+match_indent = true
+
+
+# Scry Functionality 1
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if #G.hand.cards < 1 and #G.deck.cards < 1 and #G.play.cards < 1 then"
+position = "before"
+payload = '''
+if not self.scry_view and type(create_scry_cardarea) == "function" then
+  self.scry_view = create_scry_cardarea()
+elseif self.scry_view then
+  update_scry_cardarea(self.scry_view)
+end
+'''
+match_indent = true
+
+# Scry Functionality 2
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "if self.config.type == 'hand' or self.config.type == 'play' or self.config.type == 'title' or self.config.type == 'voucher' then"
+position = "at"
+payload = "if self.config.type == 'hand' or self.config.type == 'scry' or self.config.type == 'play' or self.config.type == 'title' or self.config.type == 'voucher' then"
+match_indent = true
+overwrite = true
+
+
+# Scry Functionality 3
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "if self.config.type == 'hand' and not (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) then"
+position = "at"
+payload = "if self.config.type == 'scry' or self.config.type == 'hand' and not (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) then"
+match_indent = true
+overwrite = true
+
+# Scry Functionality 4
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "function Game:update_round_eval(dt)"
+position = "after"
+payload = '''
+    if G.scry_view then G.scry_view.states.visible = false end
+'''
+match_indent = true
+
+# Scry Functionality 5
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = "-- TARGET: add your own CardAreas for playing card evaluation"
+position = "after"
+payload = "t[#t+1] = G.scry_view"
+match_indent = true
+
+# Scry Functionality 3
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local config = {}"
+position = "before"
+payload = '''
+if card.area == G.scry_view then
+    y_off = -0.05*G.CARD_H
+    card_aligned = 'tm'
+end
+'''
+match_indent = true
+
+

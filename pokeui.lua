@@ -1,20 +1,19 @@
 --Config UI
 local restart_toggles_left = { 
-                 {ref_value = "jokers_only", label = "poke_settings_jokers_only"}, {ref_value = "no_evos", label = "poke_settings_no_evolutions"}, 
-                 {ref_value = "pokeballs", label = "poke_settings_pokeballs"}
+                 {ref_value = "pokeballs", label = "poke_settings_pokeballs"},
+                 {ref_value = "pokemon_altart", label = "poke_settings_pokemon_altart"}
                 }
                 
 local restart_toggles_right = { 
   {ref_value = "pokemon_splash", label = "poke_settings_pokemon_splash"}, 
   {ref_value = "pokemon_discovery", label = "poke_settings_pokemon_discovery", tooltip = {set = 'Other', key = 'discovery_tooltip'}},
-  {ref_value = "pokemon_altart", label = "poke_settings_pokemon_altart"}
 }
 
 local no_restart_toggles = {{ref_value = "pokemon_only", label = "poke_settings_pokemon_only"}, {ref_value = "shiny_playing_cards", label = "poke_settings_shiny_playing_cards"},
                           {ref_value = "gen_one", label = "poke_settings_pokemon_gen_one"}}
  
 local energy_toggles = {{ref_value = "unlimited_energy", label = "poke_settings_unlimited_energy"}, 
-                        {ref_value = "precise_energy", label = "poke_settings_pokemon_precise_energy"}, title = "Test", text = {"First Line", "Second Line"}}
+                        {ref_value = "precise_energy", label = "poke_settings_pokemon_precise_energy"},}
  
 local create_menu_toggles = function (parent, toggles)
   for k, v in ipairs(toggles) do
@@ -485,7 +484,7 @@ end
 local G_UIDEF_use_and_sell_buttons_ref=G.UIDEF.use_and_sell_buttons
     function G.UIDEF.use_and_sell_buttons(card)
         if (card.area == G.pack_cards and G.pack_cards) and card.ability.consumeable then --Add a use button
-            if (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and SMODS.OPENED_BOOSTER.label:find("Pocket")) or (G.GAME.poke_save_all) or (card.ability.name == 'megastone') then
+            if (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and SMODS.OPENED_BOOSTER.label:find("Pocket")) or (G.GAME.poke_save_all and not SMODS.OPENED_BOOSTER.label:find("Wish")) or (card.ability.name == 'megastone') then
                 return {
                     n=G.UIT.ROOT, config = {padding = -0.1,  colour = G.C.CLEAR}, nodes={
                       {n=G.UIT.R, config={ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5*card.T.w - 0.15, minh = 0.7*card.T.h, maxw = 0.7*card.T.w - 0.15, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'use_card', func = 'can_use_consumeable'}, nodes={
@@ -578,9 +577,9 @@ create_UIBox_pokedex_jokers = function(keys, previous_menu)
   for i = 1, #keys do
     local key = (type(keys[i]) == "table" and keys[i].key) or keys[i]
     local card = Card(G.your_collection[1].T.x + G.your_collection[1].T.w/2, G.your_collection[1].T.y, G.CARD_W, G.CARD_H, nil, G.P_CENTERS[key])
-    if type(keys[i]) == "table" and G.P_CENTERS[key].update_form then
-      G.P_CENTERS[key].update_form(card,keys[i].form)
-      update_pokemon_form_sprites(card)
+    if type(keys[i]) == "table" then
+      card.ability.extra.form = keys[i].form
+      G.P_CENTERS[key]:set_sprites(card)
     end
     G.your_collection[1]:emplace(card)
   end

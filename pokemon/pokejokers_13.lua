@@ -33,14 +33,10 @@ local snorunt={
     end
   end,
   add_to_deck = function(self, card, from_debuff)
-    if not from_debuff then
-      G.GAME.bankrupt_at = G.GAME.bankrupt_at - card.ability.extra.debt
-    end
+    G.GAME.bankrupt_at = G.GAME.bankrupt_at - card.ability.extra.debt
   end,
   remove_from_deck = function(self, card, from_debuff)
-    if not from_debuff then
-      G.GAME.bankrupt_at = G.GAME.bankrupt_at + card.ability.extra.debt
-    end
+    G.GAME.bankrupt_at = G.GAME.bankrupt_at + card.ability.extra.debt
   end,
 }
 -- Glalie 362
@@ -94,7 +90,7 @@ local glalie={
 local beldum={
   name = "beldum", 
   pos = {x = 5, y = 12},
-  config = {extra = {chips = 0, chip_mod = 8, size = 4}},
+  config = {extra = {chips = 0, chip_mod = 8, size = 4}, evo_rqmt = 64},
   loc_vars = function(self, info_queue, center)
     type_tooltip(self, info_queue, center)
     return {vars = {center.ability.extra.chips, center.ability.extra.chip_mod, center.ability.extra.size}}
@@ -130,14 +126,14 @@ local beldum={
         }
       end
     end
-    return scaling_evo(self, card, context, "j_poke_metang", card.ability.extra.chips, 64)
+    return scaling_evo(self, card, context, "j_poke_metang", card.ability.extra.chips, self.config.evo_rqmt)
   end,
 }
 -- Metang 375
 local metang={
   name = "metang", 
   pos = {x = 6, y = 12},
-  config = {extra = {chips = 0, chip_mod = 8, size = 4}},
+  config = {extra = {chips = 0, chip_mod = 8, size = 4}, evo_rqmt = 256},
   loc_vars = function(self, info_queue, center)
     type_tooltip(self, info_queue, center)
     return {vars = {center.ability.extra.chips, center.ability.extra.chip_mod, center.ability.extra.size}}
@@ -173,7 +169,7 @@ local metang={
         }
       end
     end
-    return scaling_evo(self, card, context, "j_poke_metagross", card.ability.extra.chips, 256)
+    return scaling_evo(self, card, context, "j_poke_metagross", card.ability.extra.chips, self.config.evo_rqmt)
   end,
 }
 -- Metagross 376
@@ -294,16 +290,12 @@ local jirachi_booster = {
   perishable_compat = false,
   blueprint_compat = false,
   add_to_deck = function(self, card, from_debuff)
-    if not from_debuff then
-      SMODS.change_booster_limit(card.ability.extra.bonus_packs)
-      G.GAME.extra_pocket_picks = (G.GAME.extra_pocket_picks or 0) + card.ability.extra.bonus_choices
-    end
+    SMODS.change_booster_limit(card.ability.extra.bonus_packs)
+    G.GAME.extra_pocket_picks = (G.GAME.extra_pocket_picks or 0) + card.ability.extra.bonus_choices
   end,
   remove_from_deck = function(self, card, from_debuff)
-    if not from_debuff then
-      SMODS.change_booster_limit(-card.ability.extra.bonus_packs)
-      G.GAME.extra_pocket_picks = (G.GAME.extra_pocket_picks or 0) - card.ability.extra.bonus_choices
-    end
+    SMODS.change_booster_limit(-card.ability.extra.bonus_packs)
+    G.GAME.extra_pocket_picks = (G.GAME.extra_pocket_picks or 0) - card.ability.extra.bonus_choices
   end,
   custom_pool_func = true,
   in_pool = function(self)
@@ -426,16 +418,12 @@ local jirachi_negging = {
   perishable_compat = false,
   blueprint_compat = false,
   add_to_deck = function(self, card, from_debuff)
-    if not from_debuff then
-      G.jokers.config.card_limit = G.jokers.config.card_limit + card.ability.extra.slots
-      G.GAME.negative_edition_rate = (G.GAME.negative_edition_rate or 1) * card.ability.extra.chance
-    end
+    G.jokers.config.card_limit = G.jokers.config.card_limit + card.ability.extra.slots
+    G.GAME.negative_edition_rate = (G.GAME.negative_edition_rate or 1) * card.ability.extra.chance
   end,
   remove_from_deck = function(self, card, from_debuff)
-    if not from_debuff then
-      G.jokers.config.card_limit = G.jokers.config.card_limit - card.ability.extra.slots
-      G.GAME.negative_edition_rate = (G.GAME.negative_edition_rate or 1) / card.ability.extra.chance
-    end
+    G.jokers.config.card_limit = G.jokers.config.card_limit - card.ability.extra.slots
+    G.GAME.negative_edition_rate = (G.GAME.negative_edition_rate or 1) / card.ability.extra.chance
   end,
   custom_pool_func = true,
   in_pool = function(self)
