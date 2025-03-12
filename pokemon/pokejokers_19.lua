@@ -87,7 +87,7 @@ local zorua = {
     end
   end,
   set_ability = function(self, card, initial, delay_sprites)
-    if card.area ~= G.jokers and not poke_is_in_collection(card) then
+    if card.area ~= G.jokers and not poke_is_in_collection(card) and not G.SETTINGS.paused then
       card.ability.extra.hidden_key = card.ability.extra.hidden_key or get_random_poke_key('zorua', nil, 1)
       local _o = G.P_CENTERS[card.ability.extra.hidden_key]
       card.children.center.atlas = G.ASSET_ATLAS[_o.atlas]
@@ -135,7 +135,7 @@ local zorua = {
     if G.STAGE == G.STAGES.RUN and card.area == G.jokers then
       local other_joker = G.jokers.cards[#G.jokers.cards]
       card.ability.blueprint_compat = ( other_joker and other_joker ~= card and not other_joker.debuff and other_joker.config.center.blueprint_compat and 'compatible') or 'incompatible'
-      if card.ability.blueprint_compat == 'compatible' and not card.debuff then
+      if card.ability.blueprint_compat == 'compatible' and not card.debuff and other_joker.config.center.rarity ~= 4 then
         card.children.center.atlas = other_joker.children.center.atlas
         card.children.center:set_sprite_pos(other_joker.children.center.sprite_pos)
       else
