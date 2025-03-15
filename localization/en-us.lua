@@ -767,7 +767,7 @@ return {
                     "When scored, {C:clubs}#2#{} cards",
                     "give {C:mult}+#1#{} Mult for each",
                     "{C:clubs}#2#{} card played this round",
-                    "{C:inactive,s:0.8}(If you play 5 clubs, each gives {C:mult,s:0.8}+5{C:inactive,s:0.8} Mult)",
+                    "{C:inactive,s:0.8}(If you play 5 clubs, each gives {C:mult,s:0.8}+#4#{C:inactive,s:0.8} Mult)",
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
                 } 
             },
@@ -2015,6 +2015,38 @@ return {
                     "gives their total chips",
                 }
             },
+            j_poke_ledyba = {
+                name = "Ledyba",
+                text = {
+                  "{C:mult}+#1#{} Mult for every {C:attention}4{} cards",
+                  "remaining in deck",
+                  "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)",
+                  "{C:inactive}(Evolves after {C:attention}#2#{C:inactive} rounds)",
+                }
+            },
+            j_poke_ledian = {
+                name = "Ledian",
+                text = {
+                  "{C:mult}+#1#{} Mult for every {C:attention}2{} cards",
+                  "remaining in deck",
+                  "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                }
+            },
+            j_poke_spinarak = {
+                name = "Spinarak",
+                text = {
+                  "{C:chips}+#1#{} Chips",
+                  "{C:green}#2# in #3#{} for {C:chips}+#5#{} Chips instead",
+                  "{C:inactive,s:0.8}(Evolves after {C:attention}#4#{C:inactive} rounds)",
+                }
+            },
+            j_poke_ariados = {
+              name = "Ariados",
+              text = {
+                "{C:chips}+#1#{} Chips",
+                "{C:green}#2# in #3#{} for {C:chips}+#4#{} Chips instead",
+              }
+            },
             j_poke_crobat = {
                 name = 'Crobat',
                 text = {
@@ -2861,6 +2893,32 @@ return {
                     "{br:3.5}text needs to be here to work",
                     "Adds {C:attention}triple{} this Joker's sell value to Mult",
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult){}",
+                }
+            },
+            j_poke_zweilous = {
+                name = "Zweilous",
+                text = {
+                  "{X:mult,C:white} X#1# {} Mult if played hand",
+                  "is a {C:attention}Three of a Kind{}",
+                  "{C:inactive,s:0.8}(Evolves after triggering {C:attention,s:0.8}#2#{C:inactive,s:0.8} Times){}"
+                }
+            },
+            j_poke_hydreigon = {
+                name = "Hydreigon",
+                text = {
+                  "If played hand is a {C:attention}Three of a Kind{}",
+                  "each unscoring card is destroyed",
+                  "{br:3}text needs to be here to work",
+                  "Gains {X:mult,C:white} X#2# {} Mult when a card is destroyed",
+                  "{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult){}"
+                }
+            },
+            j_poke_deino = {
+                name = "Deino",
+                text = {
+                  "{X:mult,C:white} X#1# {} Mult if played hand",
+                  "is a {C:attention}Three of a Kind{}",
+                  "{C:inactive,s:0.8}(Evolves after triggering {C:attention,s:0.8}#2#{C:inactive,s:0.8} Times){}"
                 }
             },
             j_poke_litleo = {
